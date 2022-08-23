@@ -2,6 +2,10 @@
 
 This document is aimed at developers.
 
+### How to build production builds
+
+`npm run build`
+
 ### How to autogenerate the documentation
 
 Run `npm run build:docs`. This uses the Jest runner to re-create the schemas and their documentation,
