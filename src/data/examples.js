@@ -37,10 +37,16 @@ import {
 } from "./examples/exampleAutolayoutGroups";
 
 import * as ilearn from "./examples/ilearn";
+import * as ilearnFull from "./examples/ilearn_full";
 
 export const examples = [
-    [globalDefaultsJSON1, nodesJSON1, edgesJSON1, title1], [globalDefaultsJSON2, nodesJSON2, edgesJSON2],
-    [globalDefaultsJSON3, nodesJSON3, edgesJSON3], [globalDefaultsJSON4, nodesJSON4, edgesJSON4],
-    [globalDefaultsJSON5, nodesJSON5, edgesJSON5], [globalDefaultsJSON6, nodesJSON6, edgesJSON6],
-    [globalDefaultsJSON7, nodesJSON7, edgesJSON7, title7], [ilearn.globalDefaultsJSON, ilearn.nodesJSON, ilearn.edgesJSON, ilearn.title]
+    [globalDefaultsJSON1, nodesJSON1, edgesJSON1, title1],
+    [globalDefaultsJSON2, nodesJSON2, edgesJSON2],
+    [globalDefaultsJSON3, nodesJSON3, edgesJSON3],
+    [globalDefaultsJSON4, nodesJSON4, edgesJSON4],
+    [globalDefaultsJSON5, nodesJSON5, edgesJSON5],
+    [globalDefaultsJSON6, nodesJSON6, edgesJSON6],
+    [globalDefaultsJSON7, nodesJSON7, edgesJSON7, title7],
+    [ilearn.globalDefaultsJSON, ilearn.nodesJSON, ilearn.edgesJSON, ilearn.title],
+    [ilearnFull.globalDefaultsJSON, ilearnFull.nodesJSON, ilearnFull.edgesJSON, ilearnFull.title],
 ];
