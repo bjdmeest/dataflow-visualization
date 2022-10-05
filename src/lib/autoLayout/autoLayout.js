@@ -19,7 +19,7 @@ Algorithm if groups are used in combination with autoLayout:
     * If a node is inside vgroup/hgroup, take all the nodes from that group apart and add a temporary node the size of the entire group.
     * Remove the nodes you took apart.
     * Remove all the edges that have a node from a group as source or target.
-    * (Store all of that in a object)
+    * (Store all of that in an object)
 * Step 2:
     * Build with dagre.
 
@@ -90,7 +90,7 @@ export function autoLayout(dagreGraph, globalDefaults, nodes, edges) {
     // Remove the temporary nodes and edges and add the old one again
     removeTemporaryNodesAndEdgesAndAddTheOldOnesAgain(groups, nodes1, edges1)
 
-    fixNodeGroups(nodes1)
+    fixNodeGroups(globalDefaults, nodes1)
 
     // Finally, fix the source and target handles
     for (let edge of edges1) {
@@ -120,6 +120,7 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
                     "nodes": [], "edges": [], "addedEdges": []
                 }
             }
+
             groups.vgroups[node[vgroupId]].nodes.push(JSON.parse(JSON.stringify(node)));
 
             // All edges with node as source:
@@ -156,13 +157,13 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
 
 /**
  * Remove edge if it has a node from a group as source or target, and  maybe add a new edge where the temporary big node is the source or target
- * @param {*} node 
+ * @param {*} node
  * @param {*} direction 'source' or 'target'
- * @param {*} edgess 
- * @param {*} nodess 
- * @param {*} groups 
- * @param {*} groupType 
- * @param {*} groupId 
+ * @param {*} edgess
+ * @param {*} nodess
+ * @param {*} groups
+ * @param {*} groupType
+ * @param {*} groupId
  */
 function fixEdges(node, direction, edgess, nodess, groups, groupType, groupId) {
     const edgesWithNodeAsKey = findAllWithIdAsKey(node.id, direction, edgess); // key is source of target
@@ -202,12 +203,17 @@ function getLayoutedElementsDagre(dagreGraph, globalDefaults, nodes, edges) {
     const widthId = KEY_VALUES[NODE].WIDTH.id;
     const heightId = KEY_VALUES[NODE].HEIGHT.id;
 
-    dagreGraph.setGraph({rankdir: globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id] === "horizontal" ? "LR" : "TB"});
+    let isHorizontal = globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id] === "horizontal";
+    const spacing = globalDefaults[GRAPH][KEY_VALUES[GRAPH].SPACING.id];
+
+    dagreGraph.setGraph({rankdir: isHorizontal ? "LR" : "TB"});
 
     nodes.forEach((node) => {
+        let w = node[widthId] || node["data"][widthId];
+        let h = node[heightId] || node["data"][heightId];
         dagreGraph.setNode(node.id, {
-            width: node[widthId] || globalDefaults[NODE][widthId],
-            height: node[heightId] || globalDefaults[NODE][heightId]
+            width: isHorizontal ? w * spacing : w,
+            height: isHorizontal ? h : h * spacing
         });
     });
 
@@ -215,7 +221,7 @@ function getLayoutedElementsDagre(dagreGraph, globalDefaults, nodes, edges) {
         dagreGraph.setEdge(edge[KEY_VALUES[EDGE].SOURCE.id], edge[KEY_VALUES[EDGE].TARGET.id]);
     });
 
-    dagre.layout(dagreGraph);
+    dagre.layout(dagreGraph, {});
 
     nodes.forEach((node) => {
         const nodeWithPosition = dagreGraph.node(node[KEY_VALUES[NODE].ID.id]);
