@@ -13,11 +13,11 @@ const Header = () => {
             >
                 Read the docs
             </a>
-            <br/>
+            {/* <br/>
             <Button variant={"warning"} onClick={e => {
                 e.preventDefault();
                 navigate("/create-simulation")
-            }}>Create simulation</Button>
+            }}>Create simulation</Button> */}
 
         </div>
     </>

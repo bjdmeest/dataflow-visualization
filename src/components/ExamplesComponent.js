@@ -24,7 +24,7 @@ const ExamplesComponent = ({language, setData}) => {
     }
 
     return <>
-        <div className="d-flex">
+        <div>
             {
                 examples.map((a, i) => (
                         <Button className="primary" onClick={e => loadExample(e, i + 1)}

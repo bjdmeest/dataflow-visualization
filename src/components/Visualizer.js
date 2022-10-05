@@ -137,16 +137,16 @@ const Visualizer = () => {
     return <>
 
         <ExampleComponent language={language} setData={setData}/>
-        <ControlsComponent language={language} setLanguage={setLanguage} changeSnapToGrid={changeSnapToGrid}
+        {/* <ControlsComponent language={language} setLanguage={setLanguage} changeSnapToGrid={changeSnapToGrid}
                            changeAutoSync={changeAutoSync} globalDefaults={globalDefaults}
                            nodesData={nodesData} setNodesData={setNodesData} edgesData={edgesData} setData={setData}
                            nodes={nodes} setNodes={setNodes} edges={edges} setEdges={setEdges}
-                           undoRedoModel={undoRedoModel}/>
+                           undoRedoModel={undoRedoModel}/> */}
 
         <table style={{width: "100%", marginLeft: "5px", marginRight: "5px"}}>
             <tbody>
             <tr>
-                <td style={{width: "30%"/*border: "5px solid green"*/}}>
+                {/* <td style={{width: "30%"}}>
                     <EditorArea setNodes={setNodes} setEdges={setEdges} language={language} setLanguage={setLanguage}
                                 setData={setData} globalDefaults={globalDefaults}
                                 setGlobalDefaults={setGlobalDefaultsConfig}
@@ -154,7 +154,7 @@ const Visualizer = () => {
                                 setNodesData={setNodesConfig} convertButtonEnabled={!autoSync}
                                 undoRedoModel={undoRedoModel}/>
                 </td>
-                <td style={{width: "3%"}}></td>
+                <td style={{width: "3%"}}></td> */}
                 <td>
                     <ReactFlowComponent nodes={nodes} edges={edges} onNodesChange={onNodesChange}
                                         onEdgesChange={onEdgesChange}
